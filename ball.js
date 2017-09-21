@@ -46,9 +46,37 @@ function Ball() {
 	}
 
 	this.hitsTile = function() {
-		for (var i = 0; i < tiles[i].length; i++) {
-			for (var j = 0; j < tiles[j].length; j++) {
-				tiles[i][j]
+		var left = this.pos.x-this.d/2;
+		var right = this.pos.x+this.d/2;
+		var top = this.pos.y-this.d/2;
+		var bottom = this.pos.y+this.d/2;
+
+		for (var i = 0; i < tiles.length; i++) {
+			var tile = tiles[i];
+			var tleft = tile.x;
+			var tright = tile.x+tile.w;
+			var ttop = tile.y;
+			var tbottom = tile.y+tile.h;
+
+			if (this.pos.y >= ttop && this.pos.y <= tbottom) {
+				if (left < tright && right > tright) { //hit from right
+					this.dir.x *= -1;
+					tiles.splice(i,1);
+				}
+				else if (right > tleft && left < tleft) { //hit from left
+					this.dir.x *= -1;
+					tiles.splice(i,1);
+				}
+			}
+			else if (this.pos.x >= tleft && this.pos.x <= tright) {
+				if (bottom > ttop && top < ttop) { //hit from top
+					this.dir.y *= -1;
+					tiles.splice(i,1);
+				}
+				else if (top < tbottom && bottom > tbottom) { //hit from bottom
+					this.dir.y *= -1;
+					tiles.splice(i,1);
+				}
 			}
 		}
 	}
