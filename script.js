@@ -32,16 +32,16 @@ function draw() {
 
 	if (tiles.length == 0) {
 		play = false;
-		stroke(255);
-		textSize(24);
-		var win = createP("Congratulations!");
-		win.position(100,100);
+		textSize(30);
+		textAlign(CENTER);
+		text("Congratulations!", width/2, 200);
+		fill(255);
 	}
 
 	for (var i = 0; i < tiles.length; i++) {
 		tiles[i].display();
 	}
-	
+		
 	if (!play) {
 		ball.pos.set(paddle.pos.x, paddle.pos.y-paddle.h/2-ball.d/2);
 		ball.display();
@@ -57,4 +57,16 @@ function draw() {
 
 function mouseClicked() {
 	play = true;
+	
+	if (tiles.length == 0) {
+		var index = 0;
+		for (var i = 0; i < n; i++) {
+			for (var j = 0; j < m; j++) {
+				tiles[index] = new Tile();
+				tiles[index].x = j*tiles[i].w+5*j+60;
+				tiles[index].y = i*tiles[i].h+5*i+60;
+				index++;
+			}
+		}
+	}
 }
