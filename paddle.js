@@ -1,6 +1,6 @@
 function Paddle() {
 	this.pos = createVector(0,0);
-	this.w = 100;
+	this.w = 70;
 	this.h = 12;
 
 	this.display = function() {
