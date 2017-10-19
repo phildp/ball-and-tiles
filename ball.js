@@ -31,15 +31,20 @@ function Ball() {
 		var paddleTop = paddle.pos.y-paddle.h/2;
 		var paddleBottom = paddle.pos.y+paddle.h/2;
 
+		var offset = map(this.pos.x - paddle.pos.x, -35, 35, -1, 1);
+
+
 		if (this.pos.x > paddle.pos.x-paddle.w/2-this.d/2 && this.pos.x < paddle.pos.x+paddle.w/2+this.d/2) {
 			if (this.dir.y > 0) {
 				if (top < paddleTop && bottom > paddleTop) {
 					this.dir.y *= -1;
+					this.dir.x = offset;
 				}
 			}
 			else {
 				if (top < paddleBottom && bottom > paddleBottom) {
 					this.dir.y *= -1;
+					this.dir.x *= offset;
 				}
 			}
 		}
